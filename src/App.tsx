@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { RouteComponentProps, Link, Switch, Route } from 'react-router-dom';
 import CreateCustomer from './components/customer/CreateCustomer';
+import Home from './components/Home';
+import EditCustomer from './components/customer/EditCustomer';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +21,8 @@ const App: React.FC = () => {
         </nav>
         <Switch>
           <Route path={'/create'} exact component={CreateCustomer} />
+          <Route path={'/'} exact component={Home} />
+          <Route path={'/edit/:id'} exact component={EditCustomer} />
         </Switch>
       </div>
   );

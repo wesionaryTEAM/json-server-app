@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { RouteComponentProps, withRouter, useHistory } from 'react-router-dom';
+import { RouteComponentProps, withRouter, useHistory, useParams } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TextField, Typography, Button } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
@@ -39,7 +39,7 @@ export interface IFormState {
     submitSuccess: boolean;
     loading: boolean;
 }
-const defaultValues: IValues = {
+const values: IValues = {
     first_name: "",
     last_name: "",
     email: "",
@@ -47,11 +47,23 @@ const defaultValues: IValues = {
     address: "",
     description: ""
 }
-function CreateCustomer<RouteComponentProps>() {
-    const [values, setValues] = useState(defaultValues as IValues);
+function EditCustomer<RouteComponentProps>() {
+    const [values, setValues] = useState({} as IValues);
+    const { id } = useParams();
+
 
     const classes = useStyles();
     const history = useHistory();
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        const customer = await axios.get(`http://localhost:5000/customers/${id}`)
+        await setValues(customer.data);
+        console.log(values)
+    }
     
     const handleChange = (event: any) => {
         event.persist();
@@ -63,9 +75,9 @@ function CreateCustomer<RouteComponentProps>() {
 
     const handleSubmit = (event:any) => {
         event.persist();
-        axios.post(`http://localhost:5000/customers`, values).then(data => [
+        axios.patch(`http://localhost:5000/customers/${id}`, values).then(data => {
               history.goBack()
-          ]);
+    });
     }
 
     return ( 
@@ -74,9 +86,9 @@ function CreateCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="first_name"
+          value={values.first_name}
           label="First Name"
           type="text"
-          defaultValue={values.first_name}
           className={classes.formInput}
           variant="outlined"
           onChange={handleChange}
@@ -84,9 +96,9 @@ function CreateCustomer<RouteComponentProps>() {
          <TextField
           id="outlined-input"
           name="last_name"
+          value={values.last_name}
           label="Last Name"
           type="text"
-          defaultValue={values.last_name}
           className={classes.formInput}
           variant="outlined"
           onChange={handleChange}
@@ -94,9 +106,9 @@ function CreateCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="email"
+          value={values.email}
           label="Email Address"
           type="email"
-          defaultValue={values.email}
           className={classes.formInput}
           variant="outlined"
           onChange={handleChange}
@@ -104,9 +116,9 @@ function CreateCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="phone"
+          value={values.phone}
           label="Contact Number"
           type="text"
-          defaultValue={values.phone}
           className={classes.formInput}
           variant="outlined"
           onChange={handleChange}
@@ -115,8 +127,8 @@ function CreateCustomer<RouteComponentProps>() {
           id="outlined-input"
           name="address"
           label="Address"
+          value={values.address}
           type="text"
-          defaultValue={values.address}
           className={classes.formInput}
           variant="outlined"
           onChange={handleChange}
@@ -124,9 +136,9 @@ function CreateCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="description"
+          value={values.description}
           label="Description"
           type="text"
-          defaultValue={values.description}
           className={classes.formInput}
           variant="outlined"
           onChange={handleChange}
@@ -139,11 +151,11 @@ function CreateCustomer<RouteComponentProps>() {
         startIcon={<SaveIcon />}
         onClick={handleSubmit}
       >
-        Save
+        Update
       </Button>
         </div>
       </div>
     )
 }
 
-export default withRouter(CreateCustomer);
+export default withRouter(EditCustomer);
