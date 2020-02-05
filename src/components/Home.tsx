@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Props } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -35,7 +35,7 @@ export default function SimpleTable() {
     const [data, setData] = useState([] as IValues[]);
     useEffect(() => {
         getData();
-    }, [data]);
+    }, []);
     const getData = async () => {
         const customers = await axios.get(`http://localhost:5000/customers`);
         setData(customers.data);
@@ -44,7 +44,8 @@ export default function SimpleTable() {
     const deleteCustomer = async (event: any, id: number) => {
         event.persist();
        await axios.delete(`http://localhost:5000/customers/${id}`).then(data_ => {
-            data.splice(id, 1);
+            getData();
+
         })
     }
 
