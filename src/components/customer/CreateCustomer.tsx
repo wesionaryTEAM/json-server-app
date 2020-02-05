@@ -2,19 +2,26 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { TextField, Typography } from '@material-ui/core';
+import { TextField, Typography, Button } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       '& .MuiTextField-root': {
         margin: theme.spacing(1),
         width: 200,
+        display: "block"
       },
     },
     wrapper: {
         width:"100%",
-        display:"flex"
-    }
+    },
+    formInput: {
+      width: "100%"
+    },
+    button: {
+      margin: theme.spacing(1),
+    },
   }),
 );
 
@@ -63,15 +70,70 @@ function CreateCustomer<RouteComponentProps>() {
     return ( 
         <div className={classes.root}>
         <div className={classes.wrapper}>
-        <Typography variant="h4" gutterBottom>
-        h4. Heading
-      </Typography>
         <TextField
           id="outlined-input"
+          name="first_name"
           label="First Name"
           type="text"
+          className={classes.formInput}
           variant="outlined"
+          onChange={handleChange}
         />
+         <TextField
+          id="outlined-input"
+          name="last_name"
+          label="Last Name"
+          type="text"
+          className={classes.formInput}
+          variant="outlined"
+          onChange={handleChange}
+        />
+        <TextField
+          id="outlined-input"
+          name="email"
+          label="Email Address"
+          type="email"
+          className={classes.formInput}
+          variant="outlined"
+          onChange={handleChange}
+        />
+        <TextField
+          id="outlined-input"
+          name="phone"
+          label="Contact Number"
+          type="text"
+          className={classes.formInput}
+          variant="outlined"
+          onChange={handleChange}
+        />
+        <TextField
+          id="outlined-input"
+          name="address"
+          label="Address"
+          type="text"
+          className={classes.formInput}
+          variant="outlined"
+          onChange={handleChange}
+        />
+        <TextField
+          id="outlined-input"
+          name="description"
+          label="Description"
+          type="text"
+          className={classes.formInput}
+          variant="outlined"
+          onChange={handleChange}
+        />
+        <Button
+        variant="contained"
+        color="primary"
+        size="large"
+        className={classes.button}
+        startIcon={<SaveIcon />}
+        onClick={handleSubmit}
+      >
+        Save
+      </Button>
         </div>
       </div>
     )
