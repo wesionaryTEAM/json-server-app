@@ -1,58 +1,13 @@
 {
   "customers": [
     {
-      "id": 1,
-      "first_name": "Customer_1",
-      "last_name": "Customer_11",
-      "email": "customer1@mail.com",
-      "phone": "00000000000",
-      "address": "Customer_1 Address",
-      "description": "Customer_1 description"
-    },
-    {
-      "id": 2,
-      "first_name": "Customer_2",
-      "last_name": "Customer_2",
-      "email": "customer2@mail.com",
-      "phone": "00000000000",
-      "address": "Customer_2 Adress",
-      "description": "Customer_2 Description"
-    },
-    {
-      "first_name": "Aashish",
-      "last_name": "Dahal",
-      "email": "aashdahal@gmail.com",
-      "phone": "9849949608",
-      "address": "Thimi, Bhaktapur",
-      "description": "No description",
-      "id": 3
-    },
-    {
-      "first_name": "test",
-      "last_name": "test",
-      "email": "test",
-      "phone": "test",
-      "address": "test",
-      "description": "test",
-      "id": 5
-    },
-    {
-      "first_name": "Aashish",
-      "last_name": "Dahal",
-      "email": "aashdahal@gmail.com",
-      "phone": "9849949608",
-      "address": "Thimi, Bhaktapur",
-      "description": "test",
-      "id": 6
-    },
-    {
-      "first_name": "Madhuraman",
-      "last_name": "Ghimire",
-      "email": "Test",
-      "phone": "Test",
-      "address": "Test",
-      "description": "Test",
-      "id": 7
+      "first_name": "Dean",
+      "last_name": "Hashim",
+      "email": "name@mailinator.com",
+      "phone": "Damian",
+      "address": "Kyra",
+      "description": "Jemima",
+      "id": 2
     }
   ]
 }

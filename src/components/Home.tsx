@@ -35,11 +35,17 @@ export default function SimpleTable() {
     const [data, setData] = useState([] as IValues[]);
     useEffect(() => {
         getData();
-    }, []);
+    }, [data]);
     const getData = async () => {
         const customers = await axios.get(`http://localhost:5000/customers`);
         setData(customers.data);
         console.log(customers)
+    }
+    const deleteCustomer = async (event: any, id: number) => {
+        event.persist();
+       await axios.delete(`http://localhost:5000/customers/${id}`).then(data_ => {
+            data.splice(id, 1);
+        })
     }
 
     return (
@@ -67,7 +73,7 @@ export default function SimpleTable() {
                             <TableCell align="right">{customer.description}</TableCell>
                             <TableCell align="right">
                             <Link to={`edit/${customer.id}`}> <EditIcon className={classes.marginRight} /> </Link>
-                            <Link to={`delete/${customer.id}`}>   <DeleteIcon /> </Link>
+                               <DeleteIcon onClick={e => deleteCustomer(e, customer.id)} /> 
                             </TableCell>
                         </TableRow>
                     ))}

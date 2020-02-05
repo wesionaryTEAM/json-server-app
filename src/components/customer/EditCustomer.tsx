@@ -39,7 +39,7 @@ export interface IFormState {
     submitSuccess: boolean;
     loading: boolean;
 }
-const defaultValues: IValues = {
+const values: IValues = {
     first_name: "",
     last_name: "",
     email: "",
@@ -48,7 +48,7 @@ const defaultValues: IValues = {
     description: ""
 }
 function EditCustomer<RouteComponentProps>() {
-    const [values, setValues] = useState(defaultValues as IValues);
+    const [values, setValues] = useState({} as IValues);
     const { id } = useParams();
 
 
@@ -86,7 +86,7 @@ function EditCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="first_name"
-          defaultValue={values.first_name}
+          value={values.first_name}
           label="First Name"
           type="text"
           className={classes.formInput}
@@ -96,7 +96,7 @@ function EditCustomer<RouteComponentProps>() {
          <TextField
           id="outlined-input"
           name="last_name"
-          defaultValue={values.last_name}
+          value={values.last_name}
           label="Last Name"
           type="text"
           className={classes.formInput}
@@ -106,7 +106,7 @@ function EditCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="email"
-          defaultValue={values.email}
+          value={values.email}
           label="Email Address"
           type="email"
           className={classes.formInput}
@@ -116,7 +116,7 @@ function EditCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="phone"
-          defaultValue={values.phone}
+          value={values.phone}
           label="Contact Number"
           type="text"
           className={classes.formInput}
@@ -127,7 +127,7 @@ function EditCustomer<RouteComponentProps>() {
           id="outlined-input"
           name="address"
           label="Address"
-          defaultValue={values.address}
+          value={values.address}
           type="text"
           className={classes.formInput}
           variant="outlined"
@@ -136,7 +136,7 @@ function EditCustomer<RouteComponentProps>() {
         <TextField
           id="outlined-input"
           name="description"
-          defaultValue={values.description}
+          value={values.description}
           label="Description"
           type="text"
           className={classes.formInput}
@@ -151,7 +151,7 @@ function EditCustomer<RouteComponentProps>() {
         startIcon={<SaveIcon />}
         onClick={handleSubmit}
       >
-        Save
+        Update
       </Button>
         </div>
       </div>

@@ -139,7 +139,7 @@ function CreateCustomer<RouteComponentProps>() {
         startIcon={<SaveIcon />}
         onClick={handleSubmit}
       >
-        Modify
+        Save
       </Button>
         </div>
       </div>
