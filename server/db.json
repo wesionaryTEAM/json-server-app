@@ -28,16 +28,6 @@
       "id": 3
     },
     {
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "phone": "",
-      "address": "",
-      "description": "",
-      "": "Test",
-      "id": 4
-    },
-    {
       "first_name": "test",
       "last_name": "test",
       "email": "test",
@@ -45,6 +35,24 @@
       "address": "test",
       "description": "test",
       "id": 5
+    },
+    {
+      "first_name": "Aashish",
+      "last_name": "Dahal",
+      "email": "aashdahal@gmail.com",
+      "phone": "9849949608",
+      "address": "Thimi, Bhaktapur",
+      "description": "test",
+      "id": 6
+    },
+    {
+      "first_name": "Madhuraman",
+      "last_name": "Ghimire",
+      "email": "Test",
+      "phone": "Test",
+      "address": "Test",
+      "description": "Test",
+      "id": 7
     }
   ]
 }

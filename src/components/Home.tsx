@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,54 +7,72 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import axios from 'axios';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
+    table: {
+        minWidth: 650,
+    },
+    marginRight: {
+        marginRight: 10
+    }
 });
-
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein };
+export interface IValues {
+    id: number,
+    first_name: string,
+    last_name: string,
+    email: string,
+    phone: string,
+    address: string,
+    description: string
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 export default function SimpleTable() {
-  const classes = useStyles();
+    const classes = useStyles();
+    const [data, setData] = useState([] as IValues[]);
+    useEffect(() => {
+        getData();
+    }, []);
+    const getData = async () => {
+        const customers = await axios.get(`http://localhost:5000/customers`);
+        setData(customers.data);
+        console.log(customers)
+    }
 
-  return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+    return (
+        <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell align="right">Email</TableCell>
+                        <TableCell align="right">Contact Number</TableCell>
+                        <TableCell align="right">Address</TableCell>
+                        <TableCell align="right">Description</TableCell>
+                        <TableCell align="right"></TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {data.map(customer => (
+                        <TableRow key={customer.first_name}>
+                            <TableCell component="th" scope="row">
+                            {customer.first_name} {customer.last_name}
+                            </TableCell>                    
+                            <TableCell align="right">{customer.email}</TableCell>
+                            <TableCell align="right">{customer.phone}</TableCell>
+                            <TableCell align="right">{customer.address}</TableCell>
+                            <TableCell align="right">{customer.description}</TableCell>
+                            <TableCell align="right">
+                            <Link to={`edit/${customer.id}`}> <EditIcon className={classes.marginRight} /> </Link>
+                            <Link to={`delete/${customer.id}`}>   <DeleteIcon /> </Link>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
 }
